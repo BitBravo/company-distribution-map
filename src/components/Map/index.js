@@ -16,7 +16,7 @@ const Map = ({ pins }) => {
   const zoomThreshold = 4;
   const [viewport, setViewPort] = useState({
     width: "100%",
-    height: 600,
+    height: '98vh',
     latitude: 0,
     longitude: 0,
     zoom: 1,
