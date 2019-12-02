@@ -111,7 +111,7 @@ const Map = ({ pins }) => {
           source="country-source"
           paint={{
             "fill-color": "#888888",
-            "fill-opacity": 0.4
+            "fill-opacity": 0.7
           }}
         />
         <Layer
