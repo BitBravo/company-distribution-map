@@ -1,10 +1,9 @@
 import React from 'react';
-
-import '../../assets/style.css';
-import Home from '../Map';
+import Map from '../Map';
+import pins from '../../data/pins.json'
 
 function App() {
-  return <Home />;
+  return <Map pins={pins} />;
 }
 
 export default App;
