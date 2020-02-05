@@ -17,10 +17,10 @@ const Map = ({ pins }) => {
   const [viewport, setViewPort] = useState({
     width: "100%",
     height: '98vh',
-    latitude: 0,
-    longitude: 0,
-    zoom: 1,
-    minZoom: 1,
+    latitude: 50,
+    longitude: -90,
+    zoom: 2,
+    minZoom: 2,
     maxZoom: 12
   })
   const mapRef = useRef(null)
@@ -31,18 +31,6 @@ const Map = ({ pins }) => {
     countryGeo.features.map(feature => feature.properties.bound = getBoundingBox(feature))
     setPinsGeo(getGeoJson(pins))
   }, [])
-
-  useEffect(() => {
-    // const initalCountry = countryGeo.features.filter(feature => {
-    //   const postal = feature.properties.postal;
-    //   return postal && postal.toLocaleLowerCase() === data.map.toLocaleLowerCase()
-    // })
-
-    // if (initalCountry) {
-    //   setBound(initalCountry.bound)
-    //   setZoom(3)
-    // }
-  }, [pins])
 
   const setFitBounds = (bounds) => {
     const viewportEl = new WebMercatorViewport(viewport);
@@ -92,7 +80,7 @@ const Map = ({ pins }) => {
       <MapGL
         {...viewport}
         mapboxApiAccessToken={token}
-        mapStyle="mapbox://styles/mapbox/streets-v8"
+        mapStyle="mapbox://styles/mapbox/dark-v10"
         onViewportChange={_onViewportChange}
         ref={mapRef}
         onClick={eventListner}
@@ -111,7 +99,7 @@ const Map = ({ pins }) => {
           source="country-source"
           paint={{
             "fill-color": "#888888",
-            "fill-opacity": 0.7
+            "fill-opacity": 0
           }}
         />
         <Layer
@@ -120,7 +108,7 @@ const Map = ({ pins }) => {
           source="country-source"
           paint={{
             "fill-color": "#888888",
-            "fill-opacity": 0.75
+            "fill-opacity": 0
           }}
           filter={["in", "name", ""]}
         />
@@ -249,26 +237,6 @@ const Map = ({ pins }) => {
                 [11, 0]
               ]
             },
-          }}
-        />
-
-        <Layer
-          id="company-circle"
-          type="circle"
-          source="company-geo"
-          minzoom={10}
-          paint={{
-            'circle-radius': {
-              'stops': [[10, 15], [12, 20]]
-            },
-            'circle-color': [
-              'match',
-              ['get', 'pintype'],
-              'true', '#1072BE',
-              'false', '#58EAE0',
-              '#58EAE0'
-            ],
-            'circle-opacity': 0.7
           }}
         />
 
